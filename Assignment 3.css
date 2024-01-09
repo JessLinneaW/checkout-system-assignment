@@ -1,0 +1,119 @@
+@media (max-width: 768px) {
+    .box {
+      width: 100%;
+    }
+  }
+
+h2{
+    background: rgb(135, 255, 235);
+    text: black;
+    text-align:center;
+    padding: 5px;
+    margin-top:0%;
+}
+
+button{
+    border: 1px splid black;
+    background: #ECE7E2;
+}
+
+.box{
+    box-sizing: border-box;
+    display:inline-block;
+    vertical-align: top;
+    border: 1px solid black;
+    width:33%;
+    height:500px;
+}
+
+.page{
+    padding-left: 10px;
+    padding-right:10px;
+}
+
+ .right{
+    float: right;
+}
+
+ .left{
+
+    float:left;
+}
+
+.center {
+    margin:auto;
+    text-align: center;
+  }
+
+  .listMenu{
+    position:relative;
+    display:inline-block;
+  }
+
+.resized{
+    width:10%;
+}
+
+  .numbers table{
+    text-align: center;
+    table-layout: fixed;
+    width:40%;
+  }
+
+  .numbers table td {
+    border:1px solid black;
+    background: #ECE7E2;
+    padding: 8px 16px;
+    cursor: pointer;
+  }
+
+ .time-info{
+    border:1px solid black;
+    border-bottom:0px;
+    background:#ECE7E2;
+    list-style-type: none;
+    margin:0px;
+    padding: 0;
+  }
+
+  .time-info li{
+    padding:3px 5px;
+  }
+
+  .receipt-table{
+    border:1px solid black;
+    background:#ECE7E2;
+    border-collapse: collapse;
+    margin:0px;
+    padding: 0;
+    width:100%;
+}
+
+.receipt-table thead th{
+    border:1px solid black;
+    padding: 2px 5px;
+}
+
+.receipt-table tbody td{
+    border:1px solid black;
+    padding: 2px 5px;
+    text-align:center;
+}
+
+.receipt-table tfoot th{
+    border:1px solid black;
+    padding: 2px 5px;
+}
+
+.receipt-table tfoot th:first-child{
+    text-align:right;
+}
+
+  div #space{
+    justify-content:space-between;
+    display:flex;
+    margin-top:10px;
+    margin-bottom:10.px;
+  }
+
+

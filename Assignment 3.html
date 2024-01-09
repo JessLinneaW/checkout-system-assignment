@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html>
+<link rel="stylesheet" href="Assignment 3.css">
+
+
+<head>
+
+</head>
+
+<body>
+<div class="box">
+    <h2>Administration</h2>
+    <div class="page">
+        
+            <div class="left">
+            Add a new product.
+            </div>
+<br>
+<br>
+            <div class="center" id="space">
+                Enter product name:
+                    <label for="productName">
+                        <input type="text" id="productName" name="productName" placeholder="Product Name">
+                    </label>
+            <button onClick="addProduct()">Add Product</button>
+        </div>
+<br>
+<br>
+
+            <div class="left">
+            Select a product then add the price per unit.
+            </div>
+<br>
+            <div class="center" id="space">
+                <label for ="productList">
+                    <select name="productList" id="productList">
+                        <option value="">Select Product</option>
+                    </select>
+                </label>
+                <label for="productPrice">
+                    <input type="text" id="productPrice" name="productPrice" placeholder="Product Price">
+                </label>
+                <button onClick="addPrice()">Add Price</button>
+            </div>
+
+    </div>
+</div>
+<div class="box">
+    <h2>Checkout</h2>
+    <div class="page">
+<br>
+<br>
+    <div class="center" style="width: 50%;">
+        <button onClick="newTransaction()">New Transaction</button>
+    </div>
+<br>
+<br>
+<br>
+
+        Select a product from the list below, then enter the quantity.
+        <div class="center" id="space">
+        <label for="listMenu">
+            <select name="listMenu" id="listMenu">
+                <option value="">Products</option>
+            </select>
+        </label>
+        <label for="productUnits">Units:</label>
+            <input type="text" class="resized" id="productUnits" name="productUnits" placeholder="1">
+        <button onClick="addUnits()">Add to Cart</button>
+        </div>
+    <br>
+        <div class="numbers">
+            <table class="center">
+                <tbody>
+                <tr>
+                    <td id="numbers">1</td>
+                    <td id="numbers">2</td>
+                    <td id="numbers">3</td>
+                </tr>
+                <tr>
+                    <td id="numbers">4</td>
+                    <td id="numbers">5</td>
+                    <td id="numbers">6</td>
+                </tr>
+                <tr>
+                    <td id="numbers">7</td>
+                    <td id="numbers">8</td>
+                    <td id="numbers">9</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="box">
+     <h2>Receipt</h2>
+    <div class="page">
+        <div class="receipt">
+            <ul class="time-info">
+                <li><strong>Date:</strong></li>
+                <li><strong>Time:</strong></li>
+            </ul>
+            <div>
+                <table class="receipt-table" id="receiptTable">
+                    <thead>
+                        <tr>
+                            <th>Description</th>
+                            <th>$/Unit</th>
+                            <th>Quantity</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody id="receiptTableBody">
+                    </tbody>
+                    <tfoot id="receiptTableFoot">
+                        <tr class="span-rows">
+                            <th colspan="3">Sub Total:</th>
+                            <th id="subtotal"></th>
+                        </tr>
+                        <tr class="span-rows">
+                            <th colspan="3">5% Tax:</th>
+                            <th id="tax"></th>
+                        </tr>
+                        <tr class="span-rows">
+                            <th colspan="3">Total:</th>
+                            <th id="total"></th>
+                        </tr>
+                    </tfoot>
+                </table>
+<br>
+<br>
+<br>
+                <div class="right">
+                    <button onClick="pay()">Pay for Order</button>
+                </div>
+            </div>
+<br>
+<br>
+<br>
+            <h3 class="center" id="message"></h3>
+        </div>
+</div>
+<script src="Assignment 3.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+<!--
+
+
+function addProduct() {
+  console.log("addProduct() function called");
+  const nameInput = document.getElementById('productName');
+  const name = nameInput.value;
+  if (name !=="") {
+    const product = { name };
+    products.push(product);
+    console.log("Added product:", product);
+
+  const list = document.getElementById('productList');
+  console.log("Dropdown list:", list);
+  const option = document.createElement('option');
+  option.value = products.length - 1;
+  option.text = name;
+  list.add(option);
+  }
+  
+  nameInput.value = '';
+  console.log("Product name", name);
+}
+
+
+
+
+
+function addPrice(products) {
+  console.log("addPrice() function called");
+  console.log("Products array:", products);
+  const list = document.getElementById('productList');
+  const selectedIndex = list.selectedIndex;
+  console.log("Selected index:", selectedIndex);
+  if (selectedIndex < 0) {
+    alert('Please select a product.');
+    return;
+  }
+
+  const priceInput = document.getElementById('productPrice');
+  const price = parseFloat(priceInput.value);
+  if (isNaN(price) || price <= 0) {
+    alert('Please enter a valid price.');
+    return;
+  }
+
+  console.log("Products array:", products);
+  console.log("Selected index:", selectedIndex);
+
+  const product = products[selectedIndex];
+  console.log("Product:", product);
+  if (!product) {
+    alert('Selected product not found.');
+    return;
+  }
+
+  product.price = price;
+
+  priceInput.value = '';
+
+  console.log("Price input value:", priceInput);
+  console.log("Products array:", products);
+}
+
+
+
+
+function addUnits() {
+  console.log("addUnits() function called");
+  const list = document.getElementById('productList');
+  const selectedIndex = list.selectedIndex;
+  if (selectedIndex < 0) {
+    alert('Please select a product.');
+    return;
+  }
+
+  const unitsInput = document.getElementById('productUnits');
+  const units = parseInt(unitsInput.value);
+  if (isNaN(units) || units <= 0) {
+    alert('Please enter a valid number of units.');
+    return;
+  }
+
+  const product = products[selectedIndex];
+  product.units = units;
+  product.subtotal = product.price * units;
+
+  unitsInput.value = '';
+
+  updateReceipt();
+}
+
+
+
+
+function updateReceipt() {
+  console.log("updateReceipt() function called");
+  let subtotal = 0;
+  for (const product of products) {
+    if (product.subtotal) {
+      subtotal += product.subtotal;
+    }
+  }
+  const taxRate = 0.1;
+  const tax = subtotal * taxRate;
+  const total = subtotal + tax;
+
+  const subtotalOutput = document.getElementById('subtotal');
+  subtotalOutput.textContent = `$${subtotal.toFixed(2)}`;
+
+  const taxOutput = document.getElementById('tax');
+  taxOutput.textContent = `$${tax.toFixed(2)}`;
+
+  const totalOutput = document.getElementById('total');
+  totalOutput.textContent = `$${total.toFixed(2)}`;
+
+  console.log("Subtotal:", subtotal);
+  console.log("Tax:", tax);
+  console.log("Total:", total);
+
+  console.log("Subtotal: $" + subtotal.toFixed(2));
+  console.log("Tax: $" + tax.toFixed(2));
+  console.log("Total: $" + total.toFixed(2));
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+let productListDropdown = document.getElementById("productList");
+let listMenuDropdown = document.getElementById("listMenu");
+
+
+
+function addProduct() {
+    console.log("addProduct() function called");
+    let productNameInput = document.getElementById("productName");
+    let option = document.createElement("option");
+    option.text = productNameInput.value;
+    productListDropdown.add(option);
+    productNameInput.value = "";
+  }
+
+
+
+
+function addPrice() {
+  console.log("addPrice() function called");
+  let priceInput = parseFloat(document.getElementById("productPrice").value);
+  let selectedOption = productListDropdown.options[productListDropdown.selectedIndex];
+
+  if (isNaN(priceInput) || !selectedOption.value) {
+    return;
+  }
+
+  let listMenuDropdown = document.getElementById("listMenu");
+  let option = document.createElement("option");
+  option.textContent = `${selectedOption.value} ($${priceInput.toFixed(2)})`;
+  listMenuDropdown.add(option);
+
+  console.log("Price input value:", priceInput);
+}
+
+
+
+
+  function addUnits() {
+    console.log("addUnits() function called");
+
+    let listMenuDropdown = document.getElementById("listMenu");
+    let selectedOption = listMenuDropdown.options[listMenuDropdown.selectedIndex];
+    let [product, price] = selectedOption.textContent.split(" ($");
+    let pricePerUnit = parseFloat(price.replace("$", ""));
+    let productUnitsInput = document.getElementById("productUnits");
+    let units = parseFloat(productUnitsInput.value);
+  
+    // Check if units is a valid integer
+    if (isNaN(units)) {
+      alert("Please enter a valid number of units.");
+      return;
+    }
+  
+    let total = pricePerUnit * units;
+    let receiptTable = document.querySelector(".receipt-table tbody");
+    let newRow = receiptTable.insertRow();
+    let cells = [
+      newRow.insertCell(),
+      newRow.insertCell(),
+      newRow.insertCell(),
+      newRow.insertCell(),
+    ];
+    cells[0].textContent = product;
+    cells[1].textContent = `$${pricePerUnit.toFixed(2)}`;
+    cells[2].textContent = units;
+    cells[3].textContent = `$${total.toFixed(2)}`;
+    updateReceipt();
+
+    productUnitsInput.value = "";
+  }
+
+
+  function updateReceipt() {
+    let receiptTable = document.querySelector(".receipt-table tbody");
+    let rows = receiptTable.querySelectorAll("tr");
+    let subtotal = 0;
+  
+    for (let i = 0; i < rows.length; i++) {
+      let cells = rows[i].querySelectorAll("td");
+      let price = parseFloat(cells[1].textContent.slice(1));
+      let units = parseFloat(cells[2].textContent);
+      console.log("Price:", price, typeof price);
+      console.log("Units:", units, typeof units);
+      subtotal += price * units;
+      console.log("Subtotal:", subtotal);
+    }
+  
+    let tax = subtotal * 0.05;
+    let total = subtotal + tax;
+  
+    console.log("Subtotal:", subtotal);
+    console.log("Tax:", tax);
+    console.log("Total:", total);
+  
+    document.getElementById("subTotal").textContent = subtotal.toFixed(2);
+    document.getElementById("tax").textContent = tax.toFixed(2);
+    document.getElementById("total").textContent = total.toFixed(2);
+  
+    console.log("updateReceipt() function called");
+    console.log("Subtotal: $" + subtotal.toFixed(2));
+    console.log("Tax: $" + tax.toFixed(2));
+    console.log("Total: $" + total.toFixed(2));
+  }
+
+
+  function handler(event) {
+    console.log("handler() function called");
+    let productUnitsInput = document.getElementById("productUnits");
+    let units = productUnitsInput.value ? parseInt(productUnitsInput.value) : 0;
+    let newUnits = parseInt(event.target.textContent);
+    productUnitsInput.value = units * 10 + newUnits;
+  }
+    
+  Array.from(
+    document.getElementsByTagName("td")
+  ).forEach(
+    (td) => {
+      td.addEventListener("click", handler)
+    }
+  )
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function addOption(selectbox,text,value )
+{var optn = document.createElement("OPTION");
+optn.text = text;
+optn.value = value;
+selectbox.options.add(optn);
+}
+
+    let dropdown = document.getElementById("productDropdown");
+    dropdown.innerHTML = "";
+
+    names.forEach(function(name) {
+        let option = document.createElement("option");
+        option.value = name;
+        option.text = name;
+        dropdown.add(option);
+      });
+    }
+}
+
+function listItems() {
+    let list = document.getElementById("list");
+    list.innerHTML = "";
+    
+    names.forEach(function(name) {
+      let listItem = document.createElement("div");
+      listItem.innerHTML = name;
+      list.appendChild(listItem);
+    });
+  }
+
+function addPrice() {
+    let dropdown = document.getElementById("productDropdown");
+    let name = dropdown.value;
+    let priceInput = document.getElementById("productPrice");
+    let price = priceInput.value;
+    
+    if (name !== "" && price !== "") {
+      let product = [name, price];
+      products.push(product);
+      priceInput.value = "";
+    }
+  }
+
+
+
+
+
+
+
+
+
+
+
+  // function to update the dropdown list of products
+function addSelectedProduct() {
+    console.log("Updating product list")
+    let productList = document.getElementById("productList");
+    // add each product name as a new option in the dropdown list
+    for (let i = 0; i < names.length; i++) {
+        let option = document.createElement("option");
+        option.text = names[i];
+        option.value=names[i];
+        productList.appendChild(option);
+    }
+}
+
+// function to add a price for a selected product
+function addPrice() {
+    let productList = document.getElementById("productList");
+    let priceInput = document.getElementById("product-price");
+    let price = parseFloat(priceInput.value);
+
+    // find the selected product in the names array
+    let index = names.indexOf(productList.value);
+
+    if (index !== -1 && !isNaN(price)) {
+        // create a new product object with the name and price
+        let product = {
+            name: names[index],
+            price: price
+        };
+
+        // add the product object to the products array
+        products.push(product);
+
+        // clear the input fields
+        productList.value = "";
+        priceInput.value = "";
+    }
+}
+
+addSelectedProduct();
+-->
